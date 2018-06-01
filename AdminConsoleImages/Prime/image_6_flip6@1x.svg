@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="334px" height="118px" viewBox="0 0 334 118" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 45.2 (43514) - http://www.bohemiancoding.com/sketch -->
+    <title>image_6_flip6@1x</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="328" height="112" rx="5"></rect>
+        <filter x="-1.5%" y="-3.6%" width="103.0%" height="108.9%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="1" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="1.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0.941176471   0 0 0 0 0.941176471   0 0 0 0 0.941176471  0 0 0 1 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Prime_Saving-account_02" transform="translate(-13.000000, -854.000000)">
+            <g id="image_6_flip6" transform="translate(16.000000, 856.000000)">
+                <g id="Rectangle-5-Copy-10" transform="translate(164.000000, 56.000000) scale(-1, 1) translate(-164.000000, -56.000000) ">
+                    <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                    <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+                    <rect stroke="#D8D8D8" stroke-width="1" x="0.5" y="0.5" width="327" height="111" rx="5"></rect>
+                </g>
+                <text id="Upto-₹75,000-For-fra" font-family="Lato-Light, Lato" font-size="14" font-weight="300" line-spacing="18" fill="#4A4A4A">
+                    <tspan x="120.1905" y="43">Upto </tspan>
+                    <tspan x="153.6225" y="43" font-family="PingFangSC-Light, PingFang SC">₹</tspan>
+                    <tspan x="161.6165" y="43">75,000  </tspan>
+                    <tspan x="60.057" y="61">For fraudulent use &amp; for damage or  </tspan>
+                    <tspan x="28.599" y="79"> loss of articles purchased using the debit card</tspan>
+                </text>
+            </g>
+        </g>
+    </g>
+</svg>

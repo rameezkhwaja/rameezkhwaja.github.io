@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="340px" height="100px" viewBox="0 0 340 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 45.2 (43514) - http://www.bohemiancoding.com/sketch -->
+    <title>Banner@2x</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="340" height="100"></rect>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Prime-Plus_01" transform="translate(-10.000000, -100.000000)">
+            <g id="Banner" transform="translate(10.000000, 100.000000)">
+                <g id="Group-8">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <rect stroke="#F2F2F2" x="0.5" y="0.5" width="339" height="99"></rect>
+                    <text id="Prime-Plus-Savings-A" font-family="Lato-Black, Lato" font-size="24" font-weight="700" line-spacing="24">
+                        <tspan x="25.5772188" y="60.1520996" fill="#CC1C5D">Prime </tspan>
+                        <tspan x="95.5612188" y="61.5319824" font-family="Lato-Light, Lato" font-weight="300" fill="#CC1C5D">Plus</tspan>
+                        <tspan x="138.809219" y="61.5319824" font-family="Lato-Light, Lato" font-weight="300" fill="#4A4A4A"> Savings Account</tspan>
+                    </text>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="334px" height="118px" viewBox="0 0 334 118" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 45.2 (43514) - http://www.bohemiancoding.com/sketch -->
+    <title>Image_4@3x</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="328" height="112" rx="5"></rect>
+        <filter x="-1.5%" y="-3.6%" width="103.0%" height="108.9%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="1" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="1.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0.941176471   0 0 0 0 0.941176471   0 0 0 0 0.941176471  0 0 0 1 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Prime_Saving-account_01" transform="translate(-13.000000, -598.000000)">
+            <g id="Image_4" transform="translate(16.000000, 600.000000)">
+                <g id="Rectangle-5" transform="translate(164.000000, 56.000000) scale(-1, 1) translate(-164.000000, -56.000000) ">
+                    <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                    <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+                    <rect stroke="#D8D8D8" stroke-width="1" x="0.5" y="0.5" width="327" height="111" rx="5"></rect>
+                </g>
+                <g id="Group" transform="translate(262.000000, 43.000000)" fill-rule="nonzero" fill="#CC1C5D">
+                    <path d="M47.4146341,8.60487805 L33.8926829,8.60487805 L33.8926829,0.643902439 C33.8926829,0.292682927 33.6585366,0.0585365854 33.3073171,0.0585365854 L13.7560976,0.0585365854 C13.404878,0.0585365854 13.1707317,0.292682927 13.1707317,0.643902439 L13.1707317,7.2 L0.526829268,8.60487805 C0.234146341,8.66341463 0,8.89756098 0,9.1902439 L0,26.2829268 C0,26.6341463 0.234146341,26.8682927 0.585365854,26.8682927 L47.4146341,26.8682927 C47.7658537,26.8682927 48,26.6341463 48,26.2829268 L48,9.1902439 C48,8.89756098 47.7658537,8.60487805 47.4146341,8.60487805 Z M14.3414634,1.22926829 L32.7219512,1.22926829 L32.7219512,17.1512195 L14.3414634,17.1512195 L14.3414634,1.22926829 Z M24.8780488,22.5365854 L16.2731707,18.2634146 L24.8780488,18.2634146 L24.8780488,22.5365854 Z M13.1707317,8.37073171 L13.1707317,17.7365854 C13.1707317,17.9707317 13.2878049,18.1463415 13.5219512,18.2634146 L13.5219512,18.2634146 L23.4146341,23.1219512 L1.17073171,25.5804878 L1.17073171,9.71707317 L13.1707317,8.37073171 Z M46.8292683,25.697561 L11.1219512,25.697561 L25.5219512,24.1170732 L25.5219512,24.1170732 C25.5804878,24.1170732 25.697561,24.0585366 25.7560976,24.0585366 C25.9317073,23.9414634 26.0487805,23.7658537 26.0487805,23.5902439 L26.0487805,18.3804878 L33.3073171,18.3804878 C33.6585366,18.3804878 33.8926829,18.1463415 33.8926829,17.795122 L33.8926829,9.77560976 L46.8292683,9.77560976 L46.8292683,25.697561 Z" id="Shape"></path>
+                    <rect id="Rectangle-path" x="28.097561" y="21.8341463" width="16.5658537" height="1"></rect>
+                    <rect id="Rectangle-path" x="28.097561" y="18.8487805" width="16.5658537" height="1"></rect>
+                    <rect id="Rectangle-path" x="34.4780488" y="15.9219512" width="10.1853659" height="1"></rect>
+                    <rect id="Rectangle-path" x="34.4780488" y="12.9365854" width="10.1853659" height="1"></rect>
+                </g>
+                <text id="Unlimited-free-Chequ" font-family="Lato-Regular, Lato" font-size="18" font-weight="normal" line-spacing="21">
+                    <tspan x="15" y="53" fill="#4A4A4A">Unlimited free </tspan>
+                    <tspan x="15" y="74" fill="#9E9E9E">Cheque-books </tspan>
+                </text>
+            </g>
+        </g>
+    </g>
+</svg>

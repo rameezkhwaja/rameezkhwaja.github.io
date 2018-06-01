@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="334px" height="118px" viewBox="0 0 334 118" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 45.2 (43514) - http://www.bohemiancoding.com/sketch -->
+    <title>image_4@2x</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="328" height="112" rx="5"></rect>
+        <filter x="-1.5%" y="-3.6%" width="103.0%" height="108.9%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="1" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="1.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0.941176471   0 0 0 0 0.941176471   0 0 0 0 0.941176471  0 0 0 1 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Prime-Plus_01" transform="translate(-13.000000, -598.000000)">
+            <g id="image_4" transform="translate(16.000000, 600.000000)">
+                <g id="Rectangle-5-Copy-10" transform="translate(164.000000, 56.000000) scale(-1, 1) translate(-164.000000, -56.000000) ">
+                    <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                    <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+                    <rect stroke="#D8D8D8" stroke-width="1" x="0.5" y="0.5" width="327" height="111" rx="5"></rect>
+                </g>
+                <g id="Group" transform="translate(262.000000, 32.000000)" stroke="#FFFFFF" fill-rule="nonzero" fill="#CC1C5D">
+                    <path d="M48,4.44 C48,2.04 46.08,0.24 43.8,0.24 L4.2,0.24 C1.92,0.24 0,2.04 0,4.44 L0,27.36 C0,29.64 1.92,31.56 4.2,31.56 L16.8,31.56 C16.8,31.8 16.8,32.04 16.8,32.28 C16.8,40.92 23.76,47.88 32.4,47.88 C41.04,47.88 48,40.92 48,32.28 C48,31.2 47.88,30.12 47.64,29.04 C47.88,28.56 48,27.96 48,27.36 L48,4.44 Z M32.4,45.36 C25.08,45.36 19.2,39.48 19.2,32.16 C19.2,31.92 19.2,31.68 19.2,31.44 C19.2,30.6 19.32,29.76 19.56,29.04 C21,23.28 26.16,18.96 32.4,18.96 C38.4,18.96 43.56,23.04 45.12,28.56 C45.36,29.4 45.48,30.24 45.6,31.08 C45.6,31.44 45.6,31.8 45.6,32.16 C45.6,39.48 39.72,45.36 32.4,45.36 Z M45.6,23.88 C42.84,19.44 37.92,16.56 32.4,16.56 C24.84,16.56 18.48,21.96 17.04,29.04 L4.2,29.04 C3.24,29.04 2.4,28.2 2.4,27.24 L2.4,11.16 L45.6,11.16 L45.6,23.88 Z M45.6,8.76 L2.4,8.76 L2.4,4.44 C2.4,3.36 3.24,2.64 4.2,2.64 L43.68,2.64 C44.64,2.64 45.48,3.48 45.48,4.44 L45.48,8.76 L45.6,8.76 Z" id="Shape"></path>
+                    <path d="M16.32,23.16 L6.72,23.16 C6,23.16 5.52,22.68 5.52,21.96 C5.52,21.24 6,20.76 6.72,20.76 L16.32,20.76 C17.04,20.76 17.52,21.24 17.52,21.96 C17.52,22.68 17.04,23.16 16.32,23.16 Z" id="Shape"></path>
+                    <path d="M41.76,27.24 C41.52,27 41.28,26.88 40.92,26.88 C37.92,26.76 35.16,25.44 33.48,23.4 C33.48,23.4 33.48,23.4 33.48,23.28 C33.36,23.16 33.36,23.16 33.24,23.04 C33.24,23.04 33.12,22.92 33,22.92 C32.88,22.92 32.88,22.8 32.76,22.8 C32.64,22.8 32.64,22.8 32.52,22.8 C32.4,22.8 32.28,22.8 32.28,22.8 C32.16,22.8 32.16,22.8 32.04,22.92 C32.04,22.92 32.04,22.92 32.04,22.92 C31.92,22.92 31.92,23.04 31.8,23.04 C31.68,23.16 31.68,23.16 31.56,23.28 C31.56,23.28 31.56,23.28 31.44,23.4 C29.76,25.44 27,26.76 24,26.88 C23.28,26.88 22.8,27.48 22.8,28.08 C22.8,28.56 23.16,28.92 23.52,29.16 C23.64,29.28 23.88,29.28 24,29.28 C24.48,29.28 24.84,29.28 25.32,29.16 C27.48,28.92 29.52,28.08 31.2,26.88 L31.2,39.36 C29.4,38.64 27.48,36.96 26.16,33.12 C25.92,32.52 25.32,32.16 24.6,32.4 C24,32.64 23.64,33.24 23.88,33.96 C25.32,38.52 27.96,41.28 31.8,42.24 C31.92,42.24 31.92,42.24 32.04,42.36 C32.16,42.36 32.28,42.36 32.28,42.36 C32.4,42.36 32.64,42.36 32.76,42.24 C37.2,41.04 40.08,37.56 41.4,31.68 C41.64,30.96 41.76,30.12 41.88,29.28 C41.88,28.92 42,28.68 42,28.32 C42,27.84 41.88,27.48 41.76,27.24 Z M39,31.56 C37.8,36.84 35.4,38.64 33.6,39.36 L33.6,26.88 C35.28,28.08 37.32,28.92 39.48,29.16 C39.36,30 39.24,30.84 39,31.56 Z" id="Shape"></path>
+                </g>
+                <text id="Lost-card-&amp;-Purchase" font-family="Lato-Regular, Lato" font-size="18" font-weight="normal" line-spacing="21">
+                    <tspan x="16" y="43" fill="#4A4A4A">Lost card &amp; Purchase</tspan>
+                    <tspan x="16" y="64" fill="#4A4A4A">Protection liability</tspan>
+                    <tspan x="16" y="85" fill="#9E9E9E">on Debit Card</tspan>
+                </text>
+            </g>
+        </g>
+    </g>
+</svg>
