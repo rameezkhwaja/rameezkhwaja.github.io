@@ -1,0 +1,712 @@
+<html lang="en">
+<head>
+  	<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+   <meta charset="UTF-8">
+   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="0" />
+    <meta http-equiv="X-UA-compatible" content="IE=edge"/>
+  <link rel="icon" href="images/axisIcon.png" >
+ <link href="css/ax_style.css" rel="stylesheet">
+<script  src="js/jquery.min.js"></script>
+<script src="js/angular.min.js"></script>
+<script  src="js/slick.min.js"></script>     
+</head>
+<body ng-app="zoneApp" ng-controller="ZoneCustomerController" style="overflow:{{bodyscroll}}">
+		<div class="top_header">
+			<img style="width:16%;height:71px;margin-bottom:1px;margin-left:14px;" src="css/img/Axis_logo.svg"></img>
+		</div>
+		 <div  class="main_screen" id="mainscreen" style="display:none">
+			 
+	<div class="admin-block" style="background: url({{BackImage}}) no-repeat; background-size: 100% 100%;"  when-scrolled="loadMore()">
+	<div class="box-container" ng-show="loaderFlag">
+		<div class="carousel-block" ng-show="!ComingSoonFlag" id="carousel-block">
+			<slick class="slider" settings="slickConfig"
+				ng-if="slickConfig1Loaded" infinite="true" dots="true" arrows="true">
+			<div ng-repeat="carousellist in CarouselList" >
+				<span><a ng-href="{{carousellist['navigateURL']}}"><img ng-src="./{{carousellist.ImagePath}}"
+					class="zone-image" alt="Carousel Images"/>
+					</a>
+				</span>          
+			</div>
+			</slick>			
+		</div>	
+		<div ng-show="!ComingSoonFlag" id="banner-image">
+		<div class="banner-image-container" ng-if="!slickConfig1Loaded">
+			<a ng-href="{{BannerURL}}" class="anchor-field">
+			<img alt="Zone Images" ng-src="./{{bannerImage}}" class="banner-image"/>
+			</a>
+		</div>
+		</div>
+
+		<div class="ax-lower-container" ng-cloak ng-show="!ComingSoonFlag" >
+				<div ng-repeat="zonelower in zoneListLower track by $index" class="zone-repeat">
+             <flippy class="fancy" style="position:relative" flip="['click']" flip-back="['click']" duration="600"  timing-function="linear" >
+					
+         <flippy-front class="flippy-front">
+         <div ng-if="zonelower.textZoneFlag == 'Y' && $index%2 == 0" class="frnt-div-adjust" ng-class="selectSide == 'L'  ?'left{{devicedetect}}':'right{{devicedetect}}'" ng-click="dataShoePopup($event,zonelower,'front')"><div class="paddingtab">{{ zonelower.textZone}}</div></div>
+         
+         <div ng-if="zonelower.textZoneFlag == 'Y' && $index%2 !== 0" class="frnt-div-adjust" ng-class="selectSide == 'L' ?'right{{devicedetect}}':'left{{devicedetect}}'" ng-click="dataShoePopup($event,zonelower,'front')"><div class="paddingtab">{{ zonelower.textZone}}</div></div>
+        
+         <img ng-src="./{{zonelower.imagePath}}" class="zone-link-images"/> 
+         <!--  <img ng-src="/images/banner.svg" class="zone-link-images"/>   -->
+        </flippy-front>
+        <flippy-back class="flippy-front">
+            <!-- <div  ng-if="zonelower.textFlipZoneFlag == 'Y'" class="frnt-div-adjust" ng-class="$index%2 !== 0?'left{{devicedetect}}':'right{{devicedetect}}'" ng-click="dataShoePopup($event,zonelower,'back')"><div class="paddingtab">{{ zonelower.textFlipZone}}</div></div> -->
+            
+             <div ng-if="zonelower.textFlipZoneFlag == 'Y' && $index%2 == 0" class="frnt-div-adjust" ng-class="selectSide == 'L'  ?'left{{devicedetect}}':'left{{devicedetect}}'" ng-click="dataShoePopup($event,zonelower,'back')"><div class="paddingtab">{{ zonelower.textFlipZone}}</div></div>
+         
+         <div ng-if="zonelower.textFlipZoneFlag == 'Y' && $index%2 !== 0" class="frnt-div-adjust" ng-class="selectSide == 'L' ?'left{{devicedetect}}':'left{{devicedetect}}'" ng-click="dataShoePopup($event,zonelower,'back')"><div class="paddingtab">{{ zonelower.textFlipZone}}</div></div>
+	           <img ng-src="./{{ zonelower.flipimage_url}}" class="zone-link-images"/>  
+            <!--  <img ng-src="./images/banner.svg" class="zone-link-images"/>  --> 
+        </flippy-back>
+       </flippy>
+		  </div>				
+			</div>
+			<div class="terms-text">
+				<span class="terms-conditions ax-font14 ax-font-secondary">{{termsText}}</span>
+			</div>
+			<div class="coming-soon-block" ng-show="ComingSoonFlag">
+			<span class="ax-font24 ax-font-secondary coming-soon-text">{{comingsoontext}} </span>
+			</div>
+		</div>
+	</div>
+	</div> 
+
+ 
+		<div>
+		<div class="allmessage session_logout_center" id="error" style="display:none">
+			<div class="md-title ax-font-success ax-fontfamily-primary ax-font16">We are unable to service your request.</div>
+			 <img src="images/emoticon-sad.svg" alt="Your session has expired. Please login again." class="ax-image-failure"> 
+			 <!-- <img class="md-secondary" ng-class="{'selected ax-image-failure':'{{status}}'}" ng-show="{{status}}" src="images/emoticon-sad.svg"> -->
+		</div>
+		<div class="allmessage session_logout_center" id="RedirectPage" style="display:none">
+			<div class="md-title ax-font-success ax-fontfamily-primary ax-font16 ">Your
+				session has expired. Please login again.</div>
+			<img src="images/alarm.svg" alt="Your session has expired. Please login again." class="ax-image-failure">
+		</div>
+	</div>	
+
+<!-- The Modal -->
+			<div id="myModal" class="modal" ng-if="showmodal == true" >
+			
+			  <!-- Modal content -->
+			  <div class="modal-content">
+			    <span class="close" ng-click="closemodal()">&times;</span>
+			    <div class="main">
+			     	<h2>{{modalheader}}</h2>
+			     	<div class="datamodal">
+							{{modaldata}}
+			     	</div>
+			     	<div class="btndiv">
+			     		<button class="btnstyle"  ng-click="closemodal()">OK</button>
+			     	</div>
+			    </div>
+			  </div>
+			
+			</div>
+
+
+
+	<div ng-show="(device==2||device==0)&&isLoading" class="loader-android">
+<div class="loader"></div>
+</div>
+<div ng-show="(device==1)&&isLoading" class="container gray" >
+      <div class="ispinner ispinner--gray ispinner--animating">
+        <div class="ispinner__blade"></div>
+        <div class="ispinner__blade"></div>
+        <div class="ispinner__blade"></div>
+        <div class="ispinner__blade"></div>
+        <div class="ispinner__blade"></div>
+        <div class="ispinner__blade"></div>
+        <div class="ispinner__blade"></div>
+        <div class="ispinner__blade"></div>
+        <div class="ispinner__blade"></div>
+        <div class="ispinner__blade"></div>
+        <div class="ispinner__blade"></div>
+        <div class="ispinner__blade"></div>
+      </div>
+</div> 
+<script>
+var zoneApp = angular.module('zoneApp', ['slickCarousel','angular-flippy']);
+zoneApp.constant("GENERIC_ERR_MESSAGE","We are unable to service your request.");
+zoneApp.constant("GENERIC_SESSION_ERR_MESSAGE","Your session has expired. Please login again.");
+zoneApp.constant("BASE_URL_BENEFIT","/MyBenefitZone/BenefitZone/");
+zoneApp.constant("COMING_SOON_TEXT_DISPLAY","Coming Soon ...");
+zoneApp.constant("REFER_A_FRIEND","ReferAFriend/services/index");
+zoneApp.constant("TERMS_CONDS_TEXT","*T&C Apply");
+zoneApp.constant("COMING_SOON_TEXT_COLOR","color");
+zoneApp.constant("COMING_SOON_FONT_SIZE","24px");
+zoneApp.constant("GET_BENEFIT_DETAILS","getImages");
+zoneApp.factory('httpRequestInterceptor',function() {
+		return {
+			request:function(config) {
+				config.headers['Accept']='application/json;odata=verbose';
+				config.headers['Content-Type']='application/json; charset=utf-8';
+				return config;
+			}
+		};
+	});
+zoneApp.config(function($httpProvider){
+		$httpProvider.interceptors.push('httpRequestInterceptor');
+});
+zoneApp.directive('whenScrolled', function() {
+    return function(scope, elm, attr) {
+        var raw = elm[0];
+        
+        elm.bind('touchstart', function() {
+            if (raw.scrollTop + raw.offsetHeight >= raw.scrollHeight) {
+                scope.$apply(attr.whenScrolled);
+            }
+        });
+    };
+});
+zoneApp.run(function($http) {	
+	  $http.defaults.headers.common['Content-Type'] = 'application/x-www-form-urlencoded';
+	});
+function CallLoader($scope,isLoading){
+	  $scope.device=2;
+    if(navigator.platform.toLowerCase().indexOf("android") > -1){
+    $scope.device=0;
+    };
+    if(navigator.platform.toLowerCase().indexOf("iphone") > -1||navigator.platform.toLowerCase().indexOf("iPad") > -1 ||navigator.platform.toLowerCase().indexOf("iPod") > -1){
+    $scope.device=1;
+    };
+    $scope.isLoading = isLoading;
+}
+
+/*start ZoneCustomerController*/
+zoneApp.controller('ZoneCustomerController',ZoneCustomerController).config(function (slickCarouselConfig) {
+    slickCarouselConfig.dots = true;
+    slickCarouselConfig.autoplay = true;
+  }); 
+  
+var checkimage = false;
+  
+function dummy($scope,adminZoneService,$timeout,GENERIC_SESSION_ERR_MESSAGE,GENERIC_ERR_MESSAGE,COMING_SOON_TEXT_DISPLAY,TERMS_CONDS_TEXT){
+	//var response=[{"custSegmentid":3,"name":"Prime Plus","carozalFlag":"N","backImage":"","bannerImage":"/Prime Plus/Banner@2x.svg","Banner_Url":"","LowerImages":[{"popuFdata":{"header":"P Header","Content":"P Text"},"popupBdata":{"header":"P Flip Header","Content":"P Flip Text"},"Imgid":"3","imagePath":"/Prime Plus/image_3@2x.svg","navigateURL":"","flipimage_url":"/Prime Plus/Image_3_flip3@2x.svg","custSegmentid":3,"rowid":3,"textZone":"KNOW MORE","textFlipZone":"APPLY NOW","textZoneFlag":"Y","textFlipZoneFlag":"Y","popupZoneFlag":"Y","popupFlipZoneFlag":"Y","zoneUrl":"","flipZoneUrl":"","zoneSide":"R"},{"popuFdata":{"header":"P Header","Content":"P Text"},"popupBdata":{"header":"P Flip Header","Content":"P Flip Text"},"Imgid":"3","imagePath":"/Prime Plus/image_2@2x.svg","navigateURL":"","flipimage_url":"/Prime Plus/image_2_flip2@2x.svg","custSegmentid":3,"rowid":2,"textZone":"KNOW MORE","textFlipZone":"APPLY NOW","textZoneFlag":"Y","textFlipZoneFlag":"Y","popupZoneFlag":"Y","popupFlipZoneFlag":"Y","zoneUrl":"","flipZoneUrl":"","zoneSide":"L"},{"popuFdata":{"header":"P Header","Content":"P Text"},"popupBdata":{"header":"P Flip Header","Content":"P Flip Text"},"Imgid":"3","imagePath":"/Prime Plus/image_7@2x.svg","navigateURL":"","flipimage_url":"/Prime Plus/Image_7_flip7@2x.svg","custSegmentid":3,"rowid":7,"textZone":"KNOW MORE","textFlipZone":"APPLY NOW","textZoneFlag":"Y","textFlipZoneFlag":"Y","popupZoneFlag":"Y","popupFlipZoneFlag":"Y","zoneUrl":"","flipZoneUrl":"","zoneSide":"L"},{"popuFdata":{"header":"P Header","Content":"P Text"},"popupBdata":{"header":"P Flip Header","Content":"P Flip Text"},"Imgid":"3","imagePath":"/Prime Plus/image_4@2x.svg","navigateURL":"","flipimage_url":"/Prime Plus/image_4_flip4@2x.svg","custSegmentid":3,"rowid":4,"textZone":"KNOW MORE","textFlipZone":"APPLY NOW","textZoneFlag":"Y","textFlipZoneFlag":"Y","popupZoneFlag":"Y","popupFlipZoneFlag":"Y","zoneUrl":"","flipZoneUrl":"","zoneSide":"L"},{"popuFdata":{"header":"P Header","Content":"P Text"},"popupBdata":{"header":"P Flip Header","Content":"P Flip Text"},"Imgid":"3","imagePath":"/Prime Plus/Image_5@2x.svg","navigateURL":"","flipimage_url":"/Prime Plus/image_5_flip5@2x.svg","custSegmentid":3,"rowid":5,"textZone":"KNOW MORE","textFlipZone":"APPLY NOW","textZoneFlag":"Y","textFlipZoneFlag":"Y","popupZoneFlag":"Y","popupFlipZoneFlag":"Y","zoneUrl":"","flipZoneUrl":"","zoneSide":"R"},{"popuFdata":{"header":"P Header","Content":"P Text"},"popupBdata":{"header":"P Flip Header","Content":"P Flip Text"},"Imgid":"3","imagePath":"/Prime Plus/Image_6@2x.svg","navigateURL":"","flipimage_url":"/Prime Plus/image_6_flip6@2x.svg","custSegmentid":3,"rowid":6,"textZone":"KNOW MORE","textFlipZone":"APPLY NOW","textZoneFlag":"Y","textFlipZoneFlag":"Y","popupZoneFlag":"Y","popupFlipZoneFlag":"Y","zoneUrl":"","flipZoneUrl":"","zoneSide":"L"},{"popuFdata":{"header":"P Header","Content":"P Text"},"popupBdata":{"header":"P Flip Header","Content":"P Flip Text"},"Imgid":"3","imagePath":"/Prime Plus/Image_1@2x.svg","navigateURL":"","flipimage_url":"/Prime Plus/Image_1_flip1@2x.svg","custSegmentid":3,"rowid":1,"textZone":"KNOW MORE","textFlipZone":"APPLY NOW","textZoneFlag":"Y","textFlipZoneFlag":"Y","popupZoneFlag":"Y","popupFlipZoneFlag":"Y","zoneUrl":"","flipZoneUrl":"","zoneSide":"R"}],"CarouselImages":[]}];
+
+	//var response=[{"custSegmentid":4,"name":"Senior Privilege","carozalFlag":"N","backImage":"","bannerImage":"/Senior Privilege/Banner@2x.svg","Banner_Url":"","LowerImages":[{"popuFdata":{"header":"P Header","Content":"P Text"},"popupBdata":{"header":"P Flip Header","Content":"P Flip Text"},"Imgid":"4","imagePath":"/Senior Privilege/image_7@2x.svg","navigateURL":"","flipimage_url":"/Senior Privilege/image_7_flip7_2x.svg","custSegmentid":4,"rowid":7,"textZone":"KNOW MORE","textFlipZone":"APPLY NOW","textZoneFlag":"Y","textFlipZoneFlag":"Y","popupZoneFlag":"Y","popupFlipZoneFlag":"Y","zoneUrl":"","flipZoneUrl":"","zoneSide":"R"},{"popuFdata":{"header":"P Header","Content":"P Text"},"popupBdata":{"header":"P Flip Header","Content":"P Flip Text"},"Imgid":"4","imagePath":"/Senior Privilege/Image_6@2x.svg","navigateURL":"","flipimage_url":"/Senior Privilege/image_6_flip6@2x.svg","custSegmentid":4,"rowid":6,"textZone":"KNOW MORE","textFlipZone":"APPLY NOW","textZoneFlag":"Y","textFlipZoneFlag":"Y","popupZoneFlag":"Y","popupFlipZoneFlag":"Y","zoneUrl":"","flipZoneUrl":"","zoneSide":"L"},{"popuFdata":{"header":"P Header","Content":"P Text"},"popupBdata":{"header":"P Flip Header","Content":"P Flip Text"},"Imgid":"4","imagePath":"/Senior Privilege/Image_3@2x.svg","navigateURL":"","flipimage_url":"/Senior Privilege/image_3_flip3@2x.svg","custSegmentid":4,"rowid":3,"textZone":"KNOW MORE","textFlipZone":"APPLY NOW","textZoneFlag":"Y","textFlipZoneFlag":"Y","popupZoneFlag":"Y","popupFlipZoneFlag":"Y","zoneUrl":"","flipZoneUrl":"","zoneSide":"R"},{"popuFdata":{"header":"P Header","Content":"P Text"},"popupBdata":{"header":"P Flip Header","Content":"P Flip Text"},"Imgid":"4","imagePath":"/Senior Privilege/Image_4@2x.svg","navigateURL":"","flipimage_url":"/Senior Privilege/image_4_flip4@2x.svg","custSegmentid":4,"rowid":4,"textZone":"KNOW MORE","textFlipZone":"APPLY NOW","textZoneFlag":"Y","textFlipZoneFlag":"Y","popupZoneFlag":"Y","popupFlipZoneFlag":"Y","zoneUrl":"","flipZoneUrl":"","zoneSide":"L"},{"popuFdata":{"header":"P Header","Content":"P Text"},"popupBdata":{"header":"P Flip Header","Content":"P Flip Text"},"Imgid":"4","imagePath":"/Senior Privilege/image_9@2x.svg","navigateURL":"","flipimage_url":"/Senior Privilege/image_9_flip9@2x.svg","custSegmentid":4,"rowid":9,"textZone":"KNOW MORE","textFlipZone":"APPLY NOW","textZoneFlag":"Y","textFlipZoneFlag":"Y","popupZoneFlag":"Y","popupFlipZoneFlag":"Y","zoneUrl":"","flipZoneUrl":"","zoneSide":"R"},{"popuFdata":{"header":"P Header","Content":"P Text"},"popupBdata":{"header":"P Flip Header","Content":"P Flip Text"},"Imgid":"4","imagePath":"/Senior Privilege/Image_8@2x.svg","navigateURL":"","flipimage_url":"/Senior Privilege/image_8_flip8 @2x.svg","custSegmentid":4,"rowid":8,"textZone":"KNOW MORE","textFlipZone":"APPLY NOW","textZoneFlag":"Y","textFlipZoneFlag":"Y","popupZoneFlag":"Y","popupFlipZoneFlag":"Y","zoneUrl":"","flipZoneUrl":"","zoneSide":"L"},{"popuFdata":{"header":"P Header","Content":"P Text"},"popupBdata":{"header":"P Flip Header","Content":"P Flip Text"},"Imgid":"4","imagePath":"/Senior Privilege/image_1@2x.svg","navigateURL":"","flipimage_url":"/Senior Privilege/image_1_flip1@2x.svg","custSegmentid":4,"rowid":1,"textZone":"KNOW MORE","textFlipZone":"APPLY NOW","textZoneFlag":"Y","textFlipZoneFlag":"Y","popupZoneFlag":"Y","popupFlipZoneFlag":"Y","zoneUrl":"","flipZoneUrl":"","zoneSide":"R"},{"popuFdata":{"header":"P Header","Content":"P Text"},"popupBdata":{"header":"P Flip Header","Content":"P Flip Text"},"Imgid":"4","imagePath":"/Senior Privilege/image_2@2x.svg","navigateURL":"","flipimage_url":"/Senior Privilege/Image_2_flip2@2x.svg","custSegmentid":4,"rowid":2,"textZone":"KNOW MORE","textFlipZone":"APPLY NOW","textZoneFlag":"Y","textFlipZoneFlag":"Y","popupZoneFlag":"Y","popupFlipZoneFlag":"Y","zoneUrl":"","flipZoneUrl":"","zoneSide":"L"},{"popuFdata":{"header":"P Header","Content":"P Text"},"popupBdata":{"header":"P Flip Header","Content":"P Flip Text"},"Imgid":"4","imagePath":"/Senior Privilege/image_5@2x.svg","navigateURL":"","flipimage_url":"/Senior Privilege/image_5_flip5@2x.svg","custSegmentid":4,"rowid":5,"textZone":"KNOW MORE","textFlipZone":"APPLY NOW","textZoneFlag":"Y","textFlipZoneFlag":"Y","popupZoneFlag":"Y","popupFlipZoneFlag":"Y","zoneUrl":"","flipZoneUrl":"","zoneSide":"R"}],"CarouselImages":[{"Imgid":"4","ImagePath":"/AdminConsoleImages/Image7_flip.svg","navigateURL":"","rowid":1}]}]
+
+	var response=[{"custSegmentid":2,"name":"Prime","carozalFlag":"N","backImage":"temp","bannerImage":"/AdminConsoleImages/Prime/Banner@3x.svg","Banner_Url":"http://www.google.com","LowerImages":[{"popuFdata":{"header":"PHEADER","Content":"PTEXT"},"popupBdata":{"header":"H","Content":"TEXT"},"Imgid":"2","imagePath":"/AdminConsoleImages/Prime/image_6@1x.svg","navigateURL":"","flipimage_url":"/AdminConsoleImages/Prime/image_6_flip6@1x.svg","custSegmentid":2,"rowid":3,"textZone":"Know more","textFlipZone":"Apply Now","textZoneFlag":"Y","textFlipZoneFlag":"N","popupZoneFlag":"Y","popupFlipZoneFlag":"Y","zoneUrl":"","flipZoneUrl":"DFCF","zoneSide":"R"},{"popuFdata":{"header":"PHEADER","Content":"PTEXT"},"popupBdata":{"header":"H","Content":"TEXT"},"Imgid":"2","imagePath":"/AdminConsoleImages/Prime/image_2@3x.svg","navigateURL":"","flipimage_url":"/AdminConsoleImages/Prime/image_2_flip2@1x.svg","custSegmentid":2,"rowid":2,"textZone":"Know more","textFlipZone":"Apply Now","textZoneFlag":"Y","textFlipZoneFlag":"N","popupZoneFlag":"Y","popupFlipZoneFlag":"Y","zoneUrl":"","flipZoneUrl":"DFCF","zoneSide":"R"},{"popuFdata":{"header":"PHEADER","Content":"PTEXT"},"popupBdata":{"header":"H","Content":"TEXT"},"Imgid":"2","imagePath":"/AdminConsoleImages/Prime/Image_4@3x.svg","navigateURL":"","flipimage_url":"/AdminConsoleImages/Prime/image_4_flip4@3x.svg","custSegmentid":2,"rowid":5,"textZone":"Know more","textFlipZone":"Apply Now","textZoneFlag":"Y","textFlipZoneFlag":"N","popupZoneFlag":"Y","popupFlipZoneFlag":"Y","zoneUrl":"","flipZoneUrl":"DFCF","zoneSide":"R"},{"popuFdata":{"header":"PHEADER","Content":"PTEXT"},"popupBdata":{"header":"H","Content":"TEXT"},"Imgid":"2","imagePath":"/AdminConsoleImages/Prime/Image_5@1x.svg","navigateURL":"","flipimage_url":"/AdminConsoleImages/Prime/image_5_flip5@1x.svg","custSegmentid":2,"rowid":6,"textZone":"Know more","textFlipZone":"Apply Now","textZoneFlag":"Y","textFlipZoneFlag":"N","popupZoneFlag":"Y","popupFlipZoneFlag":"Y","zoneUrl":"","flipZoneUrl":"DFCF","zoneSide":"L"},{"popuFdata":{"header":"PHEADER","Content":"PTEXT"},"popupBdata":{"header":"H","Content":"TEXT"},"Imgid":"2","imagePath":"/AdminConsoleImages/Prime/image_3@1x.svg","navigateURL":"","flipimage_url":"/AdminConsoleImages/Prime/Image_3_flip3@1x.svg","custSegmentid":2,"rowid":1,"textZone":"Know more","textFlipZone":"Apply Now","textZoneFlag":"Y","textFlipZoneFlag":"N","popupZoneFlag":"Y","popupFlipZoneFlag":"Y","zoneUrl":"","flipZoneUrl":"DFCF","zoneSide":"L"},{"popuFdata":{"header":"PHEADER","Content":"PTEXT"},"popupBdata":{"header":"H","Content":"TEXT"},"Imgid":"2","imagePath":"/AdminConsoleImages/Prime/Image_1@3x.svg","navigateURL":"","flipimage_url":"/AdminConsoleImages/Prime/Image_1_flip1@1x.svg","custSegmentid":2,"rowid":4,"textZone":"Know more","textFlipZone":"Apply Now","textZoneFlag":"Y","textFlipZoneFlag":"N","popupZoneFlag":"Y","popupFlipZoneFlag":"Y","zoneUrl":"","flipZoneUrl":"DFCF","zoneSide":"L"}],"CarouselImages":[{"Imgid":"2","ImagePath":"/AdminConsoleImages/Prime/Banner@3x.svg","navigateURL":"","rowid":1}]}]
+
+
+	
+	var check = JSON.parse(JSON.stringify(response));
+
+	$scope.zoneList= check;
+	
+	
+	var listZone=$scope.zoneList;
+	
+	var imageSide=listZone[0].LowerImages
+	var countSideR=0;
+	var countSideL=0;
+	
+	var leftsideImage=[];
+	var rightsideImage=[];
+	
+	for(var i=0;i<imageSide.length;i++){
+		
+		var dataside=imageSide[i];
+		
+		//console.dir(imageSide[i].zoneSide);
+		
+        if (imageSide[i].zoneSide.indexOf('L') > -1) {
+        	countSideL++;
+        	leftsideImage.push(imageSide[i]);
+       }else{
+    	   rightsideImage.push(imageSide[i]);
+       }
+		
+        
+        if(i == (imageSide.length-1)){
+        	countSideR=imageSide.length-countSideL;
+        	
+/*         	console.dir('right count = '+countSideR);
+        	console.dir('left count = ' +countSideL);
+        	console.dir(leftsideImage);
+        	console.dir(rightsideImage);
+        	 */
+        	
+        	if(countSideL > countSideR){
+        		$scope.selectSide='L';
+        		
+        	}else if(countSideL == countSideR){
+        		$scope.selectSide='L';
+        		
+        	}else if(countSideL < countSideR){
+        		 
+        		$scope.selectSide='R';
+        	}
+        	/*  console.dir($scope.selectSide); */
+        	 
+        	 if(checkimage==false){
+        		 aligndata(imageSide,$scope.selectSide,leftsideImage,rightsideImage);
+        	 }
+        	 
+        	
+	
+        }
+       
+       
+	}
+	
+
+	
+	
+	
+	
+	
+	if(listZone[0]["LowerImages"].length==0 && listZone[0]["CarouselImages"].length==0){
+		$scope.ComingSoonFlag=true;
+		$scope.loaderFlag=true;
+		$scope.slickConfig1Loaded=false;
+		$scope.comingsoontext=COMING_SOON_TEXT_DISPLAY;
+	}					
+	else{
+		$timeout(function () {
+			$scope.zoneListLower=listZone[0]["LowerImages"];
+			$scope.loadMore();
+	    }, 300);
+		if(listZone[0]["carozalFlag"]==="Y"){
+			$scope.slickConfig1Loaded=true;
+			$scope.CarouselList=listZone[0]["CarouselImages"];	
+		}
+		else{
+			$scope.slickConfig1Loaded=false;
+		    $scope.headerTxt=listZone[0]["headText"];
+			 $scope.bannerImage=listZone[0]["bannerImage"];
+			 $scope.BackImage=listZone[0]["backImage"];
+			 $scope.BannerURL=listZone[0]["Banner_Url"];
+			}
+			 $scope.loaderFlag=true;
+			 $scope.termsText=TERMS_CONDS_TEXT;
+	}	
+	document.getElementById("mainscreen").style.display= "block";
+	
+}
+
+
+
+function aligndata(dataside,sidedata,leftImage,rightImage,$scope){
+
+	var alignside=dataside;
+	
+	var alignside1=dataside;
+	
+/* 	console.dir(sidedata);
+	
+	console.dir(rightImage); */
+	
+	checkimage=false;
+	
+	var leftcount=0;
+	var rightcount=0;
+	
+	for(var i=0; i<alignside.length;i++){
+		if(sidedata == 'L'){
+			
+				
+				if(i%2 == 0){
+					alignside[i]=leftImage[leftcount];
+					leftcount++;
+				}else{
+					alignside[i]=rightImage[rightcount];
+					rightcount++;
+				}
+		}else if(sidedata == 'R'){
+			if(i%2 == 0){
+				alignside[i]=rightImage[rightcount];
+				rightcount++;
+			}else{
+				alignside[i]=leftImage[leftcount];
+				leftcount++;
+			}
+		}
+	}
+	//console.dir(alignside);
+
+}
+
+
+function getDataZone($scope,adminZoneService,$timeout,GENERIC_SESSION_ERR_MESSAGE,GENERIC_ERR_MESSAGE,REFER_A_FRIEND,COMING_SOON_TEXT_DISPLAY,TERMS_CONDS_TEXT){
+	CallLoader($scope, true);
+	//$scope.zoneListLower= JSON.parse(JSON.stringify(response));
+		 if (navigator.userAgent.match(/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile/i))
+	 {
+	 	
+	 	$scope.devicedetect='M';
+	 }else{
+	 	$scope.devicedetect='';
+	 }
+	 dummy($scope,adminZoneService,$timeout,GENERIC_SESSION_ERR_MESSAGE,GENERIC_ERR_MESSAGE,COMING_SOON_TEXT_DISPLAY,TERMS_CONDS_TEXT);
+
+		/* 
+ 	var promise = adminZoneService.getdataZone();
+
+ 
+ 	promise.then(
+			function(response){
+				
+				if(response.data=="103"){	
+					
+					document.getElementById("RedirectPage").style.display= "block";					
+					 $scope.loaderFlag=false;
+					 $scope.ComingSoonFlag=false;
+					 $scope.slickConfig1Loaded=false;
+				}					
+				else if(response.data!=null || response.data!=""){
+				
+					
+					$scope.zoneList= JSON.parse(JSON.stringify(response.data));
+
+					var listZone=$scope.zoneList;
+					
+					
+					
+					var listzoneSide=$scope.zoneList;
+
+					var imageSide=listzoneSide[0].LowerImages;
+					
+					var countSideR=0;
+					var countSideL=0;
+					
+					var leftsideImage=[];
+					var rightsideImage=[];
+					
+					for(var i=0;i<imageSide.length;i++){
+						
+						var dataside=imageSide[i];
+						
+						//console.dir(imageSide[i].zoneSide);
+						
+				        if (imageSide[i].zoneSide.indexOf('L') > -1) {
+				        	countSideL++;
+				        	leftsideImage.push(imageSide[i]);
+				       }else{
+				    	   rightsideImage.push(imageSide[i]);
+				       }
+						
+				        
+				        if(i == (imageSide.length-1)){
+				        	countSideR=imageSide.length-countSideL;
+				        	
+
+				        	
+				        	
+				        	if(countSideL > countSideR){
+				        		$scope.selectSide='L';
+				        		
+				        	}else if(countSideL == countSideR){
+				        		$scope.selectSide='L';
+				        		
+				        	}else if(countSideL < countSideR){
+				        		 
+				        		$scope.selectSide='R';
+				        	}
+				        	// console.dir($scope.selectSide);
+				        	 
+				        	 if(checkimage==false){
+				        		 aligndata(imageSide,$scope.selectSide,leftsideImage,rightsideImage);
+				        	 }
+				        	 
+				        	
+					
+				        }
+				       
+				       
+					}
+					
+					
+					if(listZone[0]["LowerImages"].length==0 && listZone[0]["CarouselImages"].length==0){
+						$scope.ComingSoonFlag=true;
+						$scope.loaderFlag=true;
+						$scope.slickConfig1Loaded=false;
+						$scope.comingsoontext=COMING_SOON_TEXT_DISPLAY;
+					}					
+					else{
+						$timeout(function () {
+							$scope.zoneListLower=listZone[0]["LowerImages"];
+							$scope.loadMore();
+					    }, 300);
+						if(listZone[0]["carozalFlag"]==="Y"){
+							$scope.slickConfig1Loaded=true;
+							$scope.CarouselList=listZone[0]["CarouselImages"];	
+						}
+						else{
+							$scope.slickConfig1Loaded=false;
+						    $scope.headerTxt=listZone[0]["headText"];
+							 $scope.bannerImage=listZone[0]["bannerImage"];
+							 $scope.BackImage=listZone[0]["backImage"];
+							 $scope.BannerURL=listZone[0]["Banner_Url"];
+							}
+							 $scope.loaderFlag=true;
+							 $scope.termsText=TERMS_CONDS_TEXT;
+					}	
+					document.getElementById("mainscreen").style.display= "block";
+				}
+				else{
+					document.getElementById("error").style.display= "block";
+					 $scope.loaderFlag=false;
+					 $scope.ComingSoonFlag=false;
+					 $scope.slickConfig1Loaded=false;
+				}
+				CallLoader($scope, false);
+			},
+			function(error){
+				CallLoader($scope, false);
+			}); 
+
+ 	*/
+ 	
+}
+function ZoneCustomerController($scope,adminZoneService,$timeout,GENERIC_SESSION_ERR_MESSAGE,GENERIC_ERR_MESSAGE,COMING_SOON_TEXT_DISPLAY,TERMS_CONDS_TEXT,REFER_A_FRIEND) {
+	 $scope.zoneList=[];
+	 $scope.zoneListLower=[]; 
+	 $scope.CarouselList=[];
+	 $scope.loaderFlag=false;
+	 $scope.slickConfig1Loaded=false;
+	 $scope.parentPath;
+	 $scope.headerTxt="";
+	 $scope.BackImage="";
+	 $scope.BannerURL="";
+	 $scope.CarouselURL="";
+	 $scope.ComingSoonFlag=false;
+	 $scope.comingsoontext="";
+
+	 
+
+
+	 getDataZone($scope,adminZoneService,$timeout,GENERIC_SESSION_ERR_MESSAGE,GENERIC_ERR_MESSAGE,COMING_SOON_TEXT_DISPLAY,TERMS_CONDS_TEXT);
+	 
+	 
+
+	 
+	  	var no_of_cards,j=0;
+	    $scope.items = [];
+	    $scope.zoneListLower.imagePath;
+	    $scope.zoneListLower.flipimage_url;
+	    $scope.loadMore = function() {
+	    	if(j<$scope.zoneListLower.length)
+		{
+	    		CallLoader($scope, true);
+	    		$timeout(function () {
+		    		no_of_cards=Math.round(($(window).height()-(document.getElementById("carousel-block").offsetHeight+document.getElementById("banner-image").offsetHeight))/110);
+			    	for (var i = 0; i < no_of_cards; i++) {
+				    			if(j<$scope.zoneListLower.length)
+					    		{
+						            $scope.items.push({imagePath: $scope.zoneListLower[j].imagePath,flipimage_url: $scope.zoneListLower[j].flipimage_url });
+						           j++;
+					    		}
+			    		}
+			    			CallLoader($scope, false);
+				 }, 150);	
+		}
+	    };
+	 
+	    $scope.showmodal=false;   
+	    
+	 $scope.dataShoePopup=function(e,data,showfb){
+		 e.stopPropagation();
+		    e.preventDefault();
+		    
+		    $scope.modaldata="";
+		    $scope.modalheader="";
+
+		  
+		    if(showfb == "front"){
+		    		if(data.popupZoneFlag == "Y"){
+		    			$scope.showmodal=true;
+		    			$scope.modaldata=data.popuFdata.Content;
+		    			$scope.modalheader=data.popuFdata.header;
+		    		//	document.getElementById('myModal').style.overflow = 'hidden';
+		    			 $scope.bodyscroll='hidden'
+		    		}else{
+		    			if(data.zoneUrl == "" || data.zoneUrl == undefined)
+		    				{return false;}
+		    			
+		    			if(data.zoneUrl.indexOf(REFER_A_FRIEND) >= 0){
+		    				window.open(data.zoneUrl+'?'+$scope.zoneList[0].referFriendKey)
+		    			}
+		    				else{
+		    				window.open(data.zoneUrl);
+		    			}
+		    			
+		    		}
+		    }else{
+	    		if(data.popupFlipZoneFlag == "Y"){
+	    			
+	    			$scope.showmodal=true;
+	    			$scope.modaldata=data.popupBdata.Content;
+	    			$scope.modalheader=data.popupBdata.header;
+	    			$scope.bodyscroll='hidden'
+	    		//	document.getElementById('myModal').style.overflow = 'hidden';
+	    			
+	    		}else{
+	    			if(data.flipZoneUrl == "" || data.flipZoneUrl == undefined)
+    				{return false;}
+
+	    			if(data.flipZoneUrl.indexOf(REFER_A_FRIEND) >= 0){
+	    				window.open(data.flipZoneUrl+'?'+$scope.zoneList[0].referFriendKey)
+	    			}
+	    				else{
+	    				window.open(data.flipZoneUrl);
+	    			}
+	    		}
+		    }
+		    
+	 }
+	 
+	 $scope.closemodal=function(){
+		 $scope.showmodal=false;
+		 $scope.bodyscroll='scroll'
+		 //document.getElementById('myModal').style.overflow = 'scroll';
+	 }
+	 
+	 $scope.openmodalurl=function(data){
+		 window.open(data)
+	 }
+	 
+
+	 
+	 
+	 $scope.slickConfig = {
+		      dots: true,
+		      autoplay: true,
+		        slidesToShow: 1,
+		        slidesToScroll: 1,
+		        fade:true,
+		        adaptiveHeight:true,
+		      infinite: true,
+		      arrows: true,
+		      autoplaySpeed: 5000,
+		      method: {},
+		      event: {
+		        beforeChange: function (event, slick, currentSlide, nextSlide) {
+		        },
+		        afterChange: function (event, slick, currentSlide, nextSlide) {
+		          $scope.slickCurrentIndex = currentSlide;
+		        },
+		        breakpoint: function (event, slick, breakpoint) {
+		        },
+		        destroy: function (event, slick) {
+		        },
+		        edge: function (event, slick, direction) {
+		        },
+		        reInit: function (event, slick) {
+		        },
+		        init: function (event, slick) {
+		        },
+		        setPosition: function (evnet, slick) {
+		        },
+		        swipe: function (event, slick, direction) {
+		        }
+		      }
+		    };    
+	     }
+	 
+	 /*end ZoneCustomerController*/
+	 
+	 /*start adminZoneService*/
+	 zoneApp.factory('adminZoneService',function($http,globalControlService){
+		 var factory={};
+		 factory.getdataZone=function(){		
+			 
+		 	return  $http.post(globalControlService.url.baseUrl+globalControlService.url.getBenefitDetails);
+		 };
+		 	return factory;
+		 });
+		 zoneApp.factory('globalControlService',function(){
+		 	var globalControlService =this;
+		 	globalControlService.url ={
+/*  		 			baseUrl: "BenefitZone/",
+		 			getBenefitDetails: "getImages"  */
+			 			baseUrl: "BenefitZone/",
+			 			getBenefitDetails: "getImages"  
+		 	};
+		 	return globalControlService;
+		 });
+	 
+	 /*end adminZoneService*/
+
+</script>
+
+
+<!--start flippy js -->
+
+<script>
+'use strict';
+
+angular.module('angular-flippy', []).directive('flippy', function () {
+	return {
+		restrict: 'E',
+		scope: {
+			flip: '=',
+			flipBack: '=',
+			duration: '@',
+			timingFunction: '@'
+		},
+		link: function link($scope, $elem, $attrs) {
+			var CUSTOM_PREFIX = 'custom:';
+			var state = {
+				flipped: false
+			};
+			var options = {
+				duration: 400,
+				timingFunction: 'ease-in-out'
+			};
+			angular.forEach(['duration', 'timingFunction'], function (item) {
+				options[item] = $scope[item] ? $scope[item] : options[item];
+			});
+			angular.forEach({ flip: flip, flipBack: flipBack }, function (flipFunc, evt) {
+				angular.forEach($scope[evt], function (eventName) {
+					if (eventName.indexOf(CUSTOM_PREFIX) === -1) {
+						angular.element($elem)[0].addEventListener(eventName, flipFunc);
+					} else {
+						$scope.$on(eventName.substr(CUSTOM_PREFIX.length), flipFunc);
+					}
+				});
+			});
+			angular.forEach(['flippy-front', 'flippy-back'], function (name) {
+				var el = $elem.find(name);
+				if (el.length == 1) {
+					angular.forEach(['', '-ms-', '-webkit-'], function (prefix) {
+						angular.element(el[0]).css(prefix + 'transition', 'all ' + options.duration / 1000 + 's ' + options.timingFunction);
+					});
+				}
+			});
+			function _flip() {
+				var isBack = arguments.length <= 0 || arguments[0] === undefined ? false : arguments[0];
+				if (!isBack && !state.flipped || isBack && state.flipped) {
+					setTimeout(function () {
+						$elem.toggleClass('flipped');
+						state.flipped = !state.flipped;
+					}, 0);
+				}
+			}
+			function flip() {
+				_flip();
+			}
+			function flipBack() {
+				_flip(true);
+			}			
+		}
+	};
+});
+
+
+/* flippy js end */
+
+</script>
+</body>
+
+    <script async>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-23547664-3', 'auto');
+  ga('send', 'pageview');
+</script>
+</html>

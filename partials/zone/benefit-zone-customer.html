@@ -1,0 +1,71 @@
+<div class="admin-block"
+	style="background: url({{BackImage}}) no-repeat; background-size: 100% 100%;">
+	<div class="box-container" ng-show="loaderFlag">
+		<div class="carousel-block" ng-show="!ComingSoonFlag">
+			<slick class="slider" settings="slickConfig"
+				ng-if="slickConfig1Loaded" infinite="true" dots="true" arrows="true">
+			<div ng-repeat="carousellist in CarouselList">
+				
+				<span><a ng-href="{{carousellist['nevigateURL']}}"><img ng-src="{{carousellist.ImagePath}}"
+					class="zone-image" alt="Carousel Images"/>
+					</a>
+				</span>
+			</div>
+			</slick>			
+		</div>	
+		<div ng-show="!ComingSoonFlag">
+		<div class="banner-image-container" ng-if="!slickConfig1Loaded">
+			<a ng-href="{{BannerURL}}" class="anchor-field">
+			<img alt="Zone Images" ng-src="{{bannerImage}}" class="banner-image"/>
+			</a>
+		</div>
+		</div>
+		<div class="ax-lower-container" ng-cloak ng-show="!ComingSoonFlag">
+				<div ng-repeat="zonelower in zoneListLower" class="zone-repeat">
+			 <flippy
+                    class="fancy"
+                    flip="['click']"
+                    flip-back="['click']"
+                    duration="600"
+                    timing-function="linear">
+					
+                    <flippy-front>
+         <img ng-src="{{zonelower.imagePath}}" class="zone-link-images"/>
+        </flippy-front>
+
+        <flippy-back>
+          <img ng-src="{{ zonelower.flipimage_url}}" class="zone-link-images"/>
+        </flippy-back>
+
+            </flippy>
+			  </div>				
+			</div>
+			<div class="terms-text">
+				<span class="terms-conditions ax-font14 ax-font-secondary">{{termsText}}</span>
+			</div>
+			<div class="coming-soon-block" ng-show="ComingSoonFlag">
+			<span class="ax-font24 ax-font-secondary coming-soon-text">{{comingsoontext}} </span>
+			</div>
+		</div>
+	</div>
+	
+	
+	<div ng-show="(device==2||device==0)&&isLoading" class="loader-android">
+<div class="loader"></div>
+</div>
+<div ng-show="(device==1)&&isLoading" class="container gray" >
+      <div class="ispinner ispinner--gray ispinner--animating">
+        <div class="ispinner__blade"></div>
+        <div class="ispinner__blade"></div>
+        <div class="ispinner__blade"></div>
+        <div class="ispinner__blade"></div>
+        <div class="ispinner__blade"></div>
+        <div class="ispinner__blade"></div>
+        <div class="ispinner__blade"></div>
+        <div class="ispinner__blade"></div>
+        <div class="ispinner__blade"></div>
+        <div class="ispinner__blade"></div>
+        <div class="ispinner__blade"></div>
+        <div class="ispinner__blade"></div>
+      </div>
+</div>  
